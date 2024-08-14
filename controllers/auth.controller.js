@@ -47,7 +47,7 @@ const renew = async (req, res, next) => {
 
     const token = await jwt.sign(decoded.uid, decoded.name);
 
-    res.json({ ok: true, token });
+    res.json({ ok: true, uid: decoded.uid, name: decoded.name, token });
   } catch (error) {
     console.log(error);
     next({});
