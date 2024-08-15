@@ -6,6 +6,7 @@ import { Paths } from './routes/paths.js';
 import { PORT } from './settings/config.js';
 import authRoutes from './routes/auth.js';
 import eventsRoutes from './routes/events.js';
+import path from 'path';
 
 const app = express();
 dbConnection();
@@ -20,5 +21,9 @@ app.use(Paths.Auth, authRoutes);
 app.use(Paths.Events, eventsRoutes);
 
 app.use(serverError);
+
+app.use('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 app.listen(PORT, () => console.log('Server listening on port ', PORT));
